@@ -130,7 +130,7 @@ def save_config(dev,module):
                     module.fail_json(msg="Unable to save config")
         # Destroy the object
         dev.set(o.ccCopyEntryRowStatus + ".1", 6)
-    except Exception, err:
+    except Exception as err:
         module.fail_json(msg='Unable to write to device')
 
 
@@ -176,7 +176,7 @@ def main():
 
     try:
         dev = SnmpHandler(**nelsnmp_args)
-    except Exception, err:
+    except Exception as err:
         module.fail_json(msg=str(err))
 
     return_status = save_config(dev,module)

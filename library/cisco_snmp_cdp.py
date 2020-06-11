@@ -153,7 +153,7 @@ def changed_status(changed, has_changed):
 def set_state(dev, oid, desired_state, module):
     try:
         current_state = dev.get_value(oid)
-    except Exception, err:
+    except Exception as err:
         module.fail_json(msg=str(err))
 
     if current_state == desired_state:
@@ -223,7 +223,7 @@ def main():
 
     try:
         dev = SnmpHandler(**nelsnmp_args)
-    except Exception, err:
+    except Exception as err:
         module.fail_json(msg=str(err))
 
     has_changed = False
@@ -241,7 +241,7 @@ def main():
 
             if interface is False:
                 module.fail_json(msg='Unable to find interface')
-        except Exception, err:
+        except Exception as err:
             module.fail_json(msg=str(err))
 
     # Check how to get the interface value

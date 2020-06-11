@@ -170,7 +170,7 @@ def copy_config(dev,module,source,destination,server,filename):
                     module.fail_json(msg="Config copy failed")
         # Destroy the object
         dev.set(o.ccCopyEntryRowStatus + ".1", 6)
-    except Exception, err:
+    except Exception as err:
         # destroy the object if we failed
         dev.set(o.ccCopyEntryRowStatus + ".1", 6)
         module.fail_json(msg='Unable to write to device')
@@ -226,7 +226,7 @@ def main():
 
     try:
         dev = SnmpHandler(**nelsnmp_args)
-    except Exception, err:
+    except Exception as err:
         module.fail_json(msg=str(err))
 
     return_status = copy_config(dev,module,m_args['source'],m_args['destination'],m_args['server'],m_args['filename'])

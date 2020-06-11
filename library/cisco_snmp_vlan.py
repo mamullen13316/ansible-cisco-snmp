@@ -145,7 +145,7 @@ def create_vlan(dev,vlan_id,vlan_name,module):
         dev.set(o.vtpVlanEditOperation + ".1", 4)
 
         vartable = dev.getnext(o.vtpVlanName)
-    except Exception, err:
+    except Exception as err:
         module.fail_json(msg='Unable to write to device')
 
     vlan_created = False
@@ -171,7 +171,7 @@ def delete_vlan(dev,vlan_id,module):
         dev.set(o.vtpVlanEditOperation + ".1", 3)
         dev.set(o.vtpVlanEditOperation + ".1", 4)
         vartable = dev.getnext(o.vtpVlanState)
-    except Exception, err:
+    except Exception as err:
         module.fail_json(msg='Unable to write to device')
 
     for varbinds in vartable:
@@ -224,7 +224,7 @@ def main():
 
     try:
         dev = SnmpHandler(**nelsnmp_args)
-    except Exception, err:
+    except Exception as err:
         module.fail_json(msg=str(err))
 
     changed_false = { 'changed': False }
@@ -241,7 +241,7 @@ def main():
     exists_vlan_name = False
     try:
         vartable = dev.getnext(*oids)
-    except Exception, err:
+    except Exception as err:
         module.fail_json(msg=str(err))
 
     for varbinds in vartable:
